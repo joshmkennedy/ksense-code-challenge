@@ -1,19 +1,46 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
-
+import App from './app';
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
+	async fetch(request, env): Promise<Response> {
+		// set up our application
+		const app = new App(request, env);
 
-		return new Response('Hello World!');
+		// Dead simple router
+		switch (app.reqMethod) {
+			case 'GET':
+				switch (app.reqPath) {
+					case '/secrets':
+						return app.handleListSecrets();
+
+					case '/secret':
+						return app.handleGetSecret();
+
+					case '/':
+						return app.handleHome();
+
+					default:
+						return NotFound();
+				}
+
+			// the usual methods for nonidempotent requests
+			case 'POST':
+			case 'PUT':
+				if (app.reqPath == '/store-secret') {
+					return app.handleSaveSecret();
+				}
+				return NotAllowed();
+
+			// If we get here we dont got it
+			default:
+				return NotFound();
+		}
 	},
 } satisfies ExportedHandler<Env>;
+
+const NotFound = () =>
+	new Response(`Not found`, {
+		status: 404,
+	});
+const NotAllowed = () =>
+	new Response('Not Allowed', {
+		status: 405,
+	});

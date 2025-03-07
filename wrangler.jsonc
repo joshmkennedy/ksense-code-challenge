@@ -12,8 +12,8 @@
 	},
 	"kv_namespaces": [
 		{
-			"binding": "monkeys",
-			"id": "a3dcdf81fe15479aa91204e861a5de64"
+			"binding": "SECRETS",
+			"id": "44f6278f155e4dfb8d3a967e4cb0e6d2"
 		}
 	]
 	/**
