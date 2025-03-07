@@ -2,7 +2,7 @@
 
 Thank you for taking the time to checkout my submission.
 
-[Project's Home](https://ksense-code-challange.space-monkeys.workers.dev/secrets)
+[Project's Home](https://ksense-code-challange.space-monkeys.workers.dev/)
 
 ## Why Cloudflare?
 
