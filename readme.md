@@ -25,7 +25,7 @@ and prototype quicker.
 1. Clone done the project
 
 ```sh
-git clone joshmkennedy/ksense-code-challenge
+git clone https://github.com/joshmkennedy/ksense-code-challenge
 ```
 
 2. Install the dependencies with your package manager of choice
