@@ -4,7 +4,7 @@ async function run() {
 		res.text(),
 	);
 
-	let gridData = data
+	let gridData:Point[] = data
 		.split('\n')
 		.map((line) => {
 			const [rowd, columnd, char] = line.split(' ');
@@ -20,7 +20,7 @@ async function run() {
 
 	const gridSize = findGridSize(gridData);
 
-	const grid = Array.from({ length: gridSize.r }, (e) => Array(gridSize.c).fill(' '));
+	const grid:GRID = Array.from({ length: gridSize.r }, (e) => Array(gridSize.c).fill(' '));
 
 	for (let point of gridData) {
 		let flipedY = gridSize.r - point.y;
@@ -31,7 +31,7 @@ async function run() {
 }
 run();
 
-function findGridSize(data: { x: number; y: number; ch: string }[]): { r: number; c: number } {
+function findGridSize(data: Point[]): { r: number; c: number } {
 	let r = 0;
 	let c = 0;
 
